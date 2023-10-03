@@ -1,0 +1,137 @@
+/* src/components/Carousel.css */
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.custom-carousel {
+  text-align: center;
+  margin: 20px;
+  position: relative;
+}
+
+.carousel-heading {
+  color: purple;
+  margin-bottom: 10px;
+}
+
+.custom-carousel p {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.person-text,
+.person-image {
+  animation: slideLeft 1s ease-out;
+}
+
+.person-text.hidden,
+.person-image.hidden {
+  display: none;
+}
+
+.person-text {
+  float: left;
+  width: 40%;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.person-text h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.person-text p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  text-align: left;
+}
+
+.person-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.person-image {
+  width: 200px; /* Adjust the width as needed for very large size */
+  height: 200px; /* Adjust the height as needed for very large size */
+  background-color: grey;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 10px 20px;
+}
+
+.person-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.person-image.hidden {
+  animation: none;
+}
+
+.arrow {
+  position: absolute;
+  bottom: 10px;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  background-color: purple;
+  border: 2px solid purple;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.arrow.left {
+  left: 10px;
+  margin-bottom: -25px;
+  margin-left: -31px;
+}
+
+.arrow.right {
+  right: 10px;
+  margin-bottom: 2px;
+}
+
+.indicators-container {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: -362px;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  background-color: transparent;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.indicator.active {
+  background-color: blue;
+}
