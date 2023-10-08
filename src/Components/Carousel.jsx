@@ -1,11 +1,11 @@
-// src/components/Carousel.js
-import React, { useState, useEffect } from 'react';
+// Carousel.js
+import React, { useState } from 'react';
 import './Carousel.css';
-import person1 from './Images/person1.png';
-import person2 from './Images/person2.png';
-import person3 from './Images/person3.png';
-import person4 from './Images/person4.png';
-import person5 from './Images/person5.png';
+import Ali from './Images/Ali.png';
+import Ahmad from './Images/Ahmad.png';
+import Nawaz from './Images/Nawaz.png';
+import Raza from './Images/Raza.png';
+import Haseeb from './Images/Haseeb.png';
 
 const Carousel = () => {
   const persons = [
@@ -13,79 +13,112 @@ const Carousel = () => {
     { name: 'Ahmed', text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, ratione!' },
     { name: 'Nawaz', text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla repellendus perspiciatis illo sunt odit quam doloribus quae ab tempora corrupti!' },
     { name: 'Raza', text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate sunt eveniet similique, labore nemo illum alias quaerat deleniti iure odio dignissimos, placeat eaque natus minus excepturi! Architecto sint consectetur nostrum.' },
-    // Add other persons as needed
+    { name: 'Haseeb', text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate sunt eveniet similique, labore nemo illum alias quaerat deleniti iure odio dignissimos, placeat eaque natus minus excepturi! Architecto sint consectetur nostrum.' },
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [initialRender, setInitialRender] = useState(true);
-
-  useEffect(() => {
-    // Skip the animation on the initial render
-    setInitialRender(false);
-  }, []);
+  const [indicatorHover, setIndicatorHover] = useState(null);
+  const [showAllText, setShowAllText] = useState(false);
 
   const handleArrowClick = (direction) => {
     setActiveIndex((prevIndex) => {
+      let newIndex;
+  
       if (direction === 'left') {
-        return prevIndex > 0 ? prevIndex - 1 : persons.length - 1;
+        newIndex = (prevIndex - 1 + persons.length) % persons.length;
       } else {
-        return prevIndex < persons.length - 1 ? prevIndex + 1 : 0;
+        newIndex = (prevIndex + 1) % persons.length;
       }
+  
+      // If newIndex is 0, it means we have reached the end, so loop back to the beginning
+      if (newIndex === 0) {
+        setShowAllText(false);
+      }
+  
+      return newIndex;
     });
+  };
+
+  const handleIndicatorClick = (index) => {
+    setActiveIndex(index);
+    setShowAllText(false);
+  };
+
+  const handleIndicatorHover = (index) => {
+    setIndicatorHover(index);
+  };
+
+  const handleIndicatorLeave = () => {
+    setIndicatorHover(null);
+  };
+
+  const renderPersonImages = () => {
+    const slicedPersons = [...persons, ...persons, ...persons]; // Repeat the array to create a loop
+    return slicedPersons.slice(activeIndex, activeIndex + 3).map((person, index) => (
+      <div key={index} className={`person-container ${index === 0 ? 'active' : ''}`}>
+        <div className={`person-image ${index === 0 ? 'big' : ''}`}>
+          <img src={getPersonImage(person.name)} alt={person.name} />
+        </div>
+        <div className="text-container">
+          <div className={`alis-text ${index === 0 ? 'active-person-text' : ''} ${showAllText || index === 0 ? '' : 'hidden'}`}>
+            <h1>{person.name}</h1>
+            <p>{person.text}</p>
+          </div>
+        </div>
+      </div>
+    ));
+  };
+  const renderIndicators = () => {
+    return persons.map((person, index) => (
+      <div
+        key={index}
+        className={`indicator ${index >= activeIndex && index < activeIndex + 3 ? 'active' : ''} ${indicatorHover === index ? 'hover' : ''}`}
+        onClick={() => handleIndicatorClick(index)}
+        onMouseEnter={() => handleIndicatorHover(index)}
+        onMouseLeave={handleIndicatorLeave}
+      />
+    ));
+  };
+
+  const getPersonImage = (name) => {
+    switch (name) {
+      case 'Ali':
+        return Ali;
+      case 'Ahmed':
+        return Ahmad;
+      case 'Nawaz':
+        return Nawaz;
+      case 'Raza':
+        return Raza;
+      case 'Haseeb':
+        return Haseeb;
+      default:
+        return Ali;
+    }
   };
 
   return (
     <div className="custom-carousel">
-      <h1 className="carousel-heading">What Our Valuable Clients Think About <br /> Hive Technologies</h1>
+      <h1 className="carousel-heading">What Our Valued Clients Think About <br /> Hive Technologies</h1>
       <p>
         Discover The React Stories And Experienced Customers and <br />
         And How our Services Have Transformed Their Business.
       </p>
 
-      {/* Person Text */}
-      {persons.map((person, index) => (
-        <div
-          key={index}
-          className={`person-text ${!initialRender && activeIndex === index ? '' : 'hidden'}`}
-        >
-          <h3>{person.name}</h3>
-          <p>{person.text}</p>
-        </div>
-      ))}
-
       {/* Person Images */}
       <div className="person-images">
-        {persons.map((person, index) => (
-          <div
-            key={index}
-            className={`person-image ${!initialRender && activeIndex === index ? '' : 'hidden'}`}
-          >
-            <img src={
-              index === 0 ? person1 :
-              index === 1 ? person2 :
-              index === 2 ? person3 :
-              index === 3 ? person4 :
-              person5
-            } alt={person.name} />
-          </div>
-        ))}
+        {renderPersonImages()}
       </div>
 
       {/* Left Arrow */}
-      <div className="arrow left" onClick={() => handleArrowClick('left')}>&#8249;</div>
+      <div className="arrow left" onClick={() => handleArrowClick('left')}>‹</div>
 
       {/* Right Arrow */}
-      <div className="arrow right" onClick={() => handleArrowClick('right')}>&#8250;</div>
+      <div className="arrow right" onClick={() => handleArrowClick('right')}>›</div>
 
       {/* Indicators */}
-      <div className="indicators-container">
-        {persons.map((person, index) => (
-          <div
-            key={index}
-            className={`indicator ${activeIndex === index ? 'active' : ''}`}
-            onClick={() => setActiveIndex(index)}
-          ></div>
-        ))}
+      <div className="indicators">
+        {renderIndicators()}
       </div>
     </div>
   );

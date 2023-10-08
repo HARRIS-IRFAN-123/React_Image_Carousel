@@ -1,15 +1,4 @@
-/* src/components/Carousel.css */
-
-@keyframes slideLeft {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-}
+/* Carousel.css */
 
 .custom-carousel {
   text-align: center;
@@ -18,7 +7,7 @@
 }
 
 .carousel-heading {
-  color: purple;
+  color: rgb(49, 96, 167);
   margin-bottom: 10px;
 }
 
@@ -32,106 +21,159 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
-.person-text,
-.person-image {
-  animation: slideLeft 1s ease-out;
-}
-
-.person-text.hidden,
-.person-image.hidden {
-  display: none;
-}
-
-.person-text {
-  float: left;
-  width: 40%;
-  padding: 1rem;
-  border-radius: 5px;
-  margin-right: 20px;
-}
-
-.person-text h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  text-align: left;
-}
-
-.person-text p {
-  font-size: 1rem;
-  line-height: 1.5rem;
-  text-align: left;
-}
-
-.person-images {
+ /* Carousel.css */
+.person-container {
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
-.person-image {
-  width: 200px; /* Adjust the width as needed for very large size */
-  height: 200px; /* Adjust the height as needed for very large size */
-  background-color: grey;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: 0 10px 20px;
+.text-container {
+  flex: 1;
+  text-align: left; /* Align text to the left */
 }
 
-.person-image img {
+/* Carousel.css */
+/* Carousel.css */
+
+/* Carousel.css */
+
+/* Carousel.css */
+
+.alis-image {
+  width: 200px; /* Adjusted width */
+  height: 200px; /* Adjusted height */
+  border-radius: 50%; /* Keep a circular shape */
+  overflow: hidden; /* Ensure the image stays within the circle */
+}
+
+.alis-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.person-image.hidden {
-  animation: none;
+
+.alis-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
+
+
+.alis-text {
+  margin-right: 20px; /* Adjust margin-right for spacing */
+}
+
+.active-person-text {
+  text-align: left;
+  width: 180px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+
+.person-images {
+  display: flex;
+  overflow: hidden;
+  justify-content: center; /* Center the images horizontally */
+  margin-top: 62px;
+}
+
+
+/* Carousel.css */
+/* Carousel.css */
+.person-image {
+  position: relative;
+  width: 95px;
+  height: 107px;
+  margin-right: 5px;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: grey;
+  border-radius: 50%;
+}
+
+.person-image.big {
+  width: 90px;
+  height: 90px;
+}
+
+.person-container.active .person-image.big {
+  width: 210px;
+  height: 161px;
+  border-radius: 80%;
+}
+
+/* ... (rest of the styles remain unchanged) */
+
+
+/* ... (rest of the styles remain unchanged) */
+
+
+/* ... (rest of the styles remain unchanged) */
+
+
+.person-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 
 .arrow {
   position: absolute;
-  bottom: 10px;
   font-size: 24px;
   color: white;
   cursor: pointer;
-  background-color: purple;
-  border: 2px solid purple;
   border-radius: 50%;
-  padding: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .arrow.left {
   left: 10px;
-  margin-bottom: -25px;
-  margin-left: -31px;
+  background-color: grey;
+  margin-top: -29px;
 }
 
 .arrow.right {
   right: 10px;
-  margin-bottom: 2px;
+  background-color: rgb(49, 96, 167);
+  margin-top: -29px;
 }
 
-.indicators-container {
+.indicators {
   display: flex;
   justify-content: center;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: -362px;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .indicator {
-  width: 12px;
-  height: 12px;
-  background-color: transparent;
+  width: 10px;
+  height: 10px;
+  background-color: grey;
   border-radius: 50%;
   margin: 0 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .indicator.active {
-  background-color: blue;
+  background-color: rgb(49, 96, 167);
+}
+
+.indicator.hover {
+  background-color: lightgrey;
+}
+
+.hidden {
+  display: none;
 }
