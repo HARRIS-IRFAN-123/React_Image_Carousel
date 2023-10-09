@@ -66,11 +66,12 @@
 }
 
 .active-person-text {
-  text-align: left;
+  text-align: center;
   width: 180px;
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
+  margin-left: -447px;
 }
 
 .person-images {
